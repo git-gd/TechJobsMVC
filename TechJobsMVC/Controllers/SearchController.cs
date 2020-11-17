@@ -30,22 +30,7 @@ namespace TechJobsMVC.Controllers
                 jobs = JobData.FindAll();
             } else
             {
-                string searchtype = "";
-                switch (searchType) {
-                    case "employer":
-                        searchtype = "Employer";
-                        break;
-                    case "location":
-                        searchtype = "Location";
-                        break;
-                    case "positionType":
-                        searchtype = "Position Type";
-                        break;
-                    case "coreCompetency":
-                        searchtype = "Skill";
-                        break;
-                }
-                ViewBag.title = "Jobs with " + searchtype + ": " + searchTerm;
+                ViewBag.title = "Jobs with " + ListController.ColumnChoices[searchType] + ": " + searchTerm;
                 ViewBag.searchType = searchType;
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
             }
