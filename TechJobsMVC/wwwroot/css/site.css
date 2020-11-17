@@ -114,6 +114,7 @@ textarea {
 
 td, th {
     padding: 10px;
+    white-space: nowrap;
 }
 
 tr:nth-child(odd) {
