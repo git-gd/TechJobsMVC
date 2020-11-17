@@ -8,8 +8,9 @@
         <p>
             @foreach (var column in ViewBag.columns)
             {
+                string isChecked = column.Key == "all"?"checked":"";
                 <span>
-                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" checked="@column.Key == 'all'" />
+                    <input type="radio" name="searchType" id="@column.Key" value="@column.Key" @isChecked/>
                     <label for="@column.Key">@column.Value</label>
                 </span>
             }
