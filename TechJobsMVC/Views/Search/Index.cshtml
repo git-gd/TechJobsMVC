@@ -54,25 +54,25 @@
                     <th>
                         Employer
                     </th>
-                    <td>@job.Employer</td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="employer" asp-route-searchTerm="@job.Employer">@job.Employer</a></td>
                 </tr>
                 <tr>
                     <th>
                         Location
                     </th>
-                    <td>@job.Location</td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="location" asp-route-searchTerm="@job.Location">@job.Location</a></td>
                 </tr>
                 <tr>
                     <th>
                         Position Type
                     </th>
-                    <td>@job.PositionType</td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="positionType" asp-route-searchTerm="@job.PositionType">@job.PositionType</a></td>
                 </tr>
                 <tr>
                     <th>
                         Skill
                     </th>
-                    <td>@job.CoreCompetency</td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="coreCompetency" asp-route-searchTerm="@job.CoreCompetency">@job.CoreCompetency</a></td>
                 </tr>
             </table>
         }
