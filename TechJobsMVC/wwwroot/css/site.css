@@ -184,3 +184,7 @@ label {
 .centered {
     text-align: center;
 }
+
+.highlight {
+    color: red;
+}

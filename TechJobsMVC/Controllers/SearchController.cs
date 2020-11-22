@@ -12,6 +12,18 @@ namespace TechJobsMVC.Controllers
 {
     public class SearchController : Controller
     {
+        public static string Highlight(string text, string searchTerm)
+        {
+            if (String.IsNullOrEmpty(searchTerm)) return text;
+            if (!text.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)) return text;
+
+            int index = text.IndexOf(searchTerm, StringComparison.CurrentCultureIgnoreCase);
+            //NOTE: The CLOSING tag is inserted first so that we do not need to recalculate the index
+            string highlighted = text.Insert(index + searchTerm.Length, "</span>");
+            highlighted = highlighted.Insert(index, "<span class=highlight>");
+
+            return highlighted;
+        }
         // GET: /<controller>/
         public IActionResult Index()
         {
