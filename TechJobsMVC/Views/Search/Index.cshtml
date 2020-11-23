@@ -48,15 +48,7 @@
                         Name
                     </th>
                     <td>
-                        @{if (String.IsNullOrEmpty(ViewBag.searchTerm))
-                            {
-                                @job.Name;
-                            }
-                            else
-                            {
-                                @(ViewBag.searchType == "all"?Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Name, ViewBag.searchTerm)):job.Name)
-                            }
-                        }
+                        @(ViewBag.searchType == "all"?Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Name, ViewBag.searchTerm)):job.Name)
                     </td>
                 </tr>
                 <tr>
