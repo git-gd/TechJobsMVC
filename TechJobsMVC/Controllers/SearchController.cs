@@ -15,20 +15,20 @@ namespace TechJobsMVC.Controllers
         public static string Highlight(string text, string searchTerm)
         {
             if (String.IsNullOrEmpty(searchTerm)) return text;
-            if (!text.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)) return text;
 
             const string openTag  = "<span class=highlight>";
             const string closeTag = "</span>";
-            int index = text.IndexOf(searchTerm, StringComparison.CurrentCultureIgnoreCase);
 
-            do
+            int index = text.IndexOf(searchTerm, StringComparison.CurrentCultureIgnoreCase);
+  
+            while (index >= 0 && index < text.Length)
             {
                 text = text.Insert(index, openTag);
                 index += openTag.Length + searchTerm.Length;
                 text = text.Insert(index, closeTag);
                 index += closeTag.Length;
                 index = text.IndexOf(searchTerm, index, StringComparison.CurrentCultureIgnoreCase);
-            } while (index > 0 && index < text.Length);
+            }
 
             return text;
         }
