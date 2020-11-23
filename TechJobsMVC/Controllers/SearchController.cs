@@ -45,9 +45,9 @@ namespace TechJobsMVC.Controllers
 
             if (String.IsNullOrEmpty(searchTerm))
             {
-                ViewBag.title = "All Jobs";
                 ViewBag.searchType = "all";
                 jobs = JobData.FindAll();
+                ViewBag.title = "Viewing All " + jobs.Count.ToString() + " Jobs";
             } else
             {
                 ViewBag.searchType = searchType;
