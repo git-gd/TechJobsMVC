@@ -17,12 +17,20 @@ namespace TechJobsMVC.Controllers
             if (String.IsNullOrEmpty(searchTerm)) return text;
             if (!text.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)) return text;
 
+            const string openTag  = "<span class=highlight>";
+            const string closeTag = "</span>";
             int index = text.IndexOf(searchTerm, StringComparison.CurrentCultureIgnoreCase);
-            //NOTE: The CLOSING tag is inserted first so that we do not need to recalculate the index
-            string highlighted = text.Insert(index + searchTerm.Length, "</span>");
-            highlighted = highlighted.Insert(index, "<span class=highlight>");
 
-            return highlighted;
+            do
+            {
+                text = text.Insert(index, openTag);
+                index += openTag.Length + searchTerm.Length;
+                text = text.Insert(index, closeTag);
+                index += closeTag.Length;
+                index = text.IndexOf(searchTerm, index, StringComparison.CurrentCultureIgnoreCase);
+            } while (index > 0 && index < text.Length);
+
+            return text;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -42,9 +50,10 @@ namespace TechJobsMVC.Controllers
                 jobs = JobData.FindAll();
             } else
             {
-                ViewBag.title = "Jobs with " + ListController.ColumnChoices[searchType] + ": " + searchTerm;
                 ViewBag.searchType = searchType;
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+                string jobsStr = (jobs.Count != 1) ? " Jobs" : " Job"; // 1 Job, 2 Jobs
+                ViewBag.title = jobs.Count.ToString() + jobsStr + " Found  (" + ListController.ColumnChoices[searchType] + ": " + searchTerm + ")";
             }
 
             ViewBag.columns = ListController.ColumnChoices;

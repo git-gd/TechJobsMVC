@@ -48,15 +48,13 @@
                         Name
                     </th>
                     <td>
-                        @*TODO: This works! BUT since we're doing case insensitive... REPLACE is buggering the case of the original term... so I need to NOT Replace but rather Insert!*@
                         @{if (String.IsNullOrEmpty(ViewBag.searchTerm))
                             {
                                 @job.Name;
                             }
                             else
                             {
-                                @*Html.Raw(System.Text.RegularExpressions.Regex.Replace(job.Name, ViewBag.searchTerm, "<span style='color:red'>" + ViewBag.searchTerm + "</span>", System.Text.RegularExpressions.RegexOptions.IgnoreCase))*@
-                                @Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Name, ViewBag.searchTerm))
+                                @(ViewBag.searchType == "all"?Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Name, ViewBag.searchTerm)):job.Name)
                             }
                         }
                     </td>
@@ -65,25 +63,25 @@
                     <th>
                         Employer
                     </th>
-                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="employer" asp-route-searchTerm="@job.Employer">@Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Employer.ToString(), ViewBag.searchTerm))</a></td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="employer" asp-route-searchTerm="@job.Employer">@(ViewBag.searchType=="all" || ViewBag.searchType=="employer"?Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Employer.ToString(), ViewBag.searchTerm)):job.Employer)</a></td>
                 </tr>
                 <tr>
                     <th>
                         Location
                     </th>
-                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="location" asp-route-searchTerm="@job.Location">@Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Location.ToString(), ViewBag.searchTerm))</a></td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="location" asp-route-searchTerm="@job.Location">@(ViewBag.searchType=="all" || ViewBag.searchType=="location"?Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.Location.ToString(), ViewBag.searchTerm)):job.Location)</a></td>
                 </tr>
                 <tr>
                     <th>
                         Position Type
                     </th>
-                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="positionType" asp-route-searchTerm="@job.PositionType">@Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.PositionType.ToString(), ViewBag.searchTerm))</a></td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="positionType" asp-route-searchTerm="@job.PositionType">@(ViewBag.searchType=="all" || ViewBag.searchType=="positionType"?Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.PositionType.ToString(), ViewBag.searchTerm)):job.PositionType)</a></td>
                 </tr>
                 <tr>
                     <th>
                         Skill
                     </th>
-                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="coreCompetency" asp-route-searchTerm="@job.CoreCompetency">@Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.CoreCompetency.ToString(), ViewBag.searchTerm))</a></td>
+                    <td><a asp-controller="Search" asp-action="Results" asp-route-searchType="coreCompetency" asp-route-searchTerm="@job.CoreCompetency">@(ViewBag.searchType=="all" || ViewBag.searchType=="coreCompetency"?Html.Raw(TechJobsMVC.Controllers.SearchController.Highlight(job.CoreCompetency.ToString(), ViewBag.searchTerm)):job.CoreCompetency)</a></td>
                 </tr>
             </table>
         }
