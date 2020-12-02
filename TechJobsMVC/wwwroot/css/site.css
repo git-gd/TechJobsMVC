@@ -185,6 +185,7 @@ label {
     text-align: center;
 }
 
+/* Search Index Highlight Color */
 .highlight {
     color: red;
 }
